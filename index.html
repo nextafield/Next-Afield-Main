@@ -295,6 +295,9 @@
         <h2 style="margin-bottom:20px;font-weight:700;color:#8bc34a;">Next Afield Secure Portal</h2>
         <p style="margin-bottom:30px;opacity:0.8;">Enter the password to access our exclusive platform</p>
         
+        <!-- Hidden input field to trigger mobile keyboard -->
+        <input type="password" id="hiddenInput" style="position:absolute;opacity:0;height:0;width:0;padding:0;border:none;">
+        
         <div style="display:flex;justify-content:center;gap:10px;margin-bottom:30px;" id="passwordBoxes">
             <!-- Password boxes will be generated here -->
         </div>
@@ -369,6 +372,7 @@
     // Create password boxes
     const password = "NASR@$b1";
     const passwordBoxes = document.getElementById("passwordBoxes");
+    const hiddenInput = document.getElementById("hiddenInput");
     let currentBox = 0;
     
     for(let i = 0; i < password.length; i++) {
@@ -380,11 +384,29 @@
     
     const boxes = document.querySelectorAll(".password-box");
     
-    // Focus first box
+    // Focus first box and show mobile keyboard
     boxes[0].classList.add("active");
+    hiddenInput.focus();
     
-    // Handle keyboard input
-    document.addEventListener("keydown", function(e) {
+    // Handle keyboard input through hidden input
+    hiddenInput.addEventListener("input", function(e) {
+        const val = this.value;
+        if(val.length > 0) {
+            const lastChar = val[val.length-1];
+            if(currentBox < password.length) {
+                boxes[currentBox].textContent = lastChar;
+                boxes[currentBox].classList.remove("active");
+                currentBox++;
+                if(currentBox < password.length) {
+                    boxes[currentBox].classList.add("active");
+                }
+                this.value = ""; // Clear input after each character
+            }
+        }
+    });
+    
+    // Handle backspace
+    hiddenInput.addEventListener("keydown", function(e) {
         if(e.key === "Backspace") {
             if(currentBox > 0) {
                 boxes[currentBox].textContent = "";
@@ -392,17 +414,6 @@
                 currentBox--;
                 boxes[currentBox].classList.add("active");
                 boxes[currentBox].textContent = "";
-            }
-        } 
-        else if(e.key.length === 1 && e.key.match(/[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/)) {
-            if(currentBox < password.length) {
-                // Display the exact character entered (preserve case)
-                boxes[currentBox].textContent = e.key;
-                boxes[currentBox].classList.remove("active");
-                currentBox++;
-                if(currentBox < password.length) {
-                    boxes[currentBox].classList.add("active");
-                }
             }
         }
     });
@@ -456,6 +467,7 @@
             boxes.forEach(b => b.classList.remove("active"));
             this.classList.add("active");
             currentBox = parseInt(this.dataset.index);
+            hiddenInput.focus();
         });
     });
 </script>
