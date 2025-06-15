@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="img/logo.png">
-    <title>Next Afield</title>
+    <title>Next Afield - Intern Portal</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
-
+    <script src="https://cdn.tailwindcss.com"></script>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -24,59 +24,138 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <!-- Custom Styles -->
+    <style>
+        /* Glassmorphism Effect */
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        /* 3D Card Tilt Effect */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
 
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+        /* 3D Button Press Effect */
+        .btn-3d {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        .btn-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Circular Marks with 3D Effect */
+        .circular-marks {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #34D399, #10B981);
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Profile Avatar Ring */
+        .avatar-ring {
+            position: relative;
+        }
+        .avatar-ring::after {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3B82F6, #8B5CF6);
+            z-index: -1;
+            animation: ring-glow 2s infinite;
+        }
+        @keyframes ring-glow {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        /* Table Row Hover */
+        .table-row {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .table-row:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Collapsible Table Animation */
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .collapsible-content.active {
+            max-height: 1000px;
+        }
+
+        /* Header Text Shadow */
+        .header-text {
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2563EB;
+        }
+        
+        /* Next Afield custom styles */
+        .intern-bg {
+            background: linear-gradient(135deg, #71C0B3 0%, #247a9f 100%);
+        }
+        
+        .intern-btn-primary {
+            background-color: #247a9f;
+            border-color: #247a9f;
+        }
+        
+        .intern-btn-primary:hover {
+            background-color: #1a5f7d;
+            border-color: #1a5f7d;
+        }
+    </style>
 </head>
 
-<body>
+<body class="intern-bg">
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-grow text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Next Afield...</span>
-        </div>
+        
     </div>
     <!-- Spinner End -->
-
-
-    <!-- Topbar Start -->
-     <!--
-    <div class="container-fluid bg-light p-0 wow fadeIn" data-wow-delay="0.1s">
-        <div class="row gx-0 d-none d-lg-flex">
-            <div class="col-lg-7 px-5 text-start">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
-                    <small class="fa fa-map-marker-alt text-primary me-2"></small>
-                    <small>123 Street, New York, USA</small>
-                </div>
-                <div class="h-100 d-inline-flex align-items-center py-3">
-                    <small class="far fa-clock text-primary me-2"></small>
-                    <small>Mon - Fri : 09.00 AM - 09.00 PM</small>
-                </div>
-            </div>
-            <div class="col-lg-5 px-5 text-end">
-                <div class="h-100 d-inline-flex align-items-center py-3 me-4">
-                    <small class="fa fa-phone-alt text-primary me-2"></small>
-                    <small>+012 345 6789</small>
-                </div>
-                <div class="h-100 d-inline-flex align-items-center">
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-facebook-f"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-twitter"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a class="btn btn-sm-square rounded-circle bg-white text-primary me-0" href=""><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-    <!-- Topbar End -->
-
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 wow fadeIn" data-wow-delay="0.1s">
@@ -86,373 +165,336 @@
                 <img src="img/logo.png" alt="Next Afield Logo" style="height: 40px; width: auto; margin-right: 10px;">
                 <div>
                     <h1 class="m-0" style="color: #247a9f;">Next Afield</h1>
-                    <h6 class="m-0" style="color: #71C0B3;">Agriculture Services and Solutions</h6>
+                    <h6 class="m-0" style="color: #71C0B3;">Intern Portal</h6>
                 </div>
-                            </a>
+            </a>
     
-            <!-- 🔹 Fading RGB Greeting Message (Right Side of "Next Afield") -->
+            <!-- Greeting Message -->
             <p id="greetingMessage" class="fs-5 fw-bold mb-0 me-4"></p>
     
             <!-- Navbar Toggler (Mobile View) -->
-            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            
     
             <!-- Navbar Links -->
             <div class="collapse navbar-collapse" id="navbarCollapse">
-                <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about.html" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function () {
-                                document.querySelectorAll(".dropdown-toggle").forEach(function (toggle) {
-                                    toggle.addEventListener("click", function (event) {
-                                        event.preventDefault(); // Prevent default anchor behavior
-                    
-                                        // Close all open submenus except the one clicked
-                                        document.querySelectorAll(".dropdown-submenu .dropdown-menu").forEach(function (menu) {
-                                            if (menu !== toggle.nextElementSibling) {
-                                                menu.style.display = "none";
-                                            }
-                                        });
-                    
-                                        // Toggle the clicked submenu
-                                        let submenu = toggle.nextElementSibling;
-                                        submenu.style.display = (submenu.style.display === "block") ? "none" : "block";
-                                    });
-                                });
-                    
-                                // Close submenu when clicking outside
-                                document.addEventListener("click", function (event) {
-                                    if (!event.target.closest(".dropdown-submenu")) {
-                                        document.querySelectorAll(".dropdown-submenu .dropdown-menu").forEach(function (menu) {
-                                            menu.style.display = "none";
-                                        });
-                                    }
-                                });
-                            });
-                        </script>
-                    </head>
-                    <body>
-                        <div class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-
-                            <div class="dropdown-menu rounded-0 rounded-bottom m-0">
-                                <a href="feature.html" class="dropdown-item">Feature</a>
-                            <a href="login.html" class="dropdown-item">Login</a>
                 
-                                <!-- Core Business Pages -->
-                                <div class="dropdown-item dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle">Core Business Pages</a>
-                                    <div class="dropdown-menu">
-                                        <a href="solutions.html" class="dropdown-item">Solutions</a>
-                                        <a href="manapanta.html" class="dropdown-item">Mana Panta</a>
-                                    </div>
-                                </div>
-                                <!-- Farmer & Client Pages -->
-                                <div class="dropdown-item dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle">Farmer & Client Pages</a>
-                                    <div class="dropdown-menu">
-                                        <a href="market-prices.html" class="dropdown-item">Market Prices</a>
-                                        <a href="crop-insurance.html" class="dropdown-item">Crop Insurance</a>
-                                        <a href="transport-logistics.html" class="dropdown-item">Transport & Logistics</a>
-                                        <a href="profit-tracker.html" class="dropdown-item">Profit Tracker</a>
-                                        <a href="price-prediction.html" class="dropdown-item">Advanced Price Prediction</a>
-                                        <a href="knowledge-hub.html" class="dropdown-item">Knowledge Hub</a>
-                                        <a href="testimonial.html" class="dropdown-item">Success Stories</a>
-                                    </div>
-                                </div>
-                                <!-- Engagement & Support Pages -->
-                                <div class="dropdown-item dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle">Engagement & Support</a>
-                                    <div class="dropdown-menu">
-                                        <a href="contact.html" class="dropdown-item">Contact Us</a>
-                                        <a href="faq.html" class="dropdown-item">FAQs</a>
-                                        <a href="support.html" class="dropdown-item">Help & Support</a>
-                                        <a href="quote.html" class="dropdown-item">Get a Quote</a>
-                                    </div>
-                                </div>
-                                <!-- Business Growth Pages -->
-                                <div class="dropdown-item dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle">Business Growth</a>
-                                    <div class="dropdown-menu">
-                                        <a href="investor-relations.html" class="dropdown-item">Investor Relations</a>
-                                        <a href="careers.html" class="dropdown-item">Careers</a>
-                                        <a href="partnerships.html" class="dropdown-item">Partnerships</a>
-                                        <a href="events.html" class="dropdown-item">Events & Webinars</a>
-                                        <a href="case-studies.html" class="dropdown-item">Case Studies</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-                    </body>
-                        
-                    </div>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                </div>
-                <a href="login.html" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">
-                    Login<i class="fa fa-arrow-right ms-3"></i>
-                </a>
+                <button id="logout-btn" class="btn intern-btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" style="display: none;">
+                </button>
             </div>
         </div>
     </nav>
-    
-    <style>
-        @keyframes fadeColors {
-            0% { color: rgb(255, 0, 0); }   /* Red */
-            20% { color: rgb(0, 255, 0); }  /* Green */
-            40% { color: rgb(0, 0, 255); }  /* Blue */
-            60% { color: rgb(255, 255, 0); } /* Yellow */
-            80% { color: rgb(255, 0, 255); } /* Purple */
-            100% { color: rgb(0, 255, 255); } /* Cyan */
-        }
-    
-        #greetingMessage {
-            animation: fadeColors 5s infinite ease-in-out;
-            transition: color 1s ease-in-out;
-        }
-    </style>
-    
-    <script>
-        function updateGreeting() {
-            let now = new Date();
-            let hours = now.getHours();
-            let message = "";
-    
-            if (hours >= 5 && hours < 12) {
-                message = "🌞 Good Morning! Welcome to Next Afield.";
-            } else if (hours >= 12 && hours < 17) {
-                message = "🌤 Good Afternoon! Let’s grow together.";
-            } else if (hours >= 17 && hours < 21) {
-                message = "🌙 Good Evening! Agriculture meets innovation.";
-            } else {
-                message = "🌜 Good Night! Planning for tomorrow’s success.";
-            }
-    
-            document.getElementById("greetingMessage").innerText = message;
-        }
-    
-        updateGreeting();
-    </script>
-    
-    
-    <!-- 🔹 Fading RGB Greeting Message -->
-    <!-- <div class="text-center my-2">
-        <p id="greetingMessage" class="fs-5 fw-bold">Welcome to Next Afield!</p>
-    </div>
--->
-    
-    <style>
-        @keyframes fadeColors {
-            0% { color: rgb(255, 0, 0); }   /* Red */
-            20% { color: rgb(0, 255, 0); }  /* Green */
-            40% { color: rgb(0, 0, 255); }  /* Blue */
-            60% { color: rgb(255, 255, 0); } /* Yellow */
-            80% { color: rgb(255, 0, 255); } /* Purple */
-            100% { color: rgb(0, 255, 255); } /* Cyan */
-        }
-    
-        #greetingMessage {
-            animation: fadeColors 5s infinite ease-in-out;
-            transition: color 1s ease-in-out;
-        }
-    </style>
-    
-    <script>
-        function updateGreeting() {
-            let now = new Date();
-            let hours = now.getHours();
-            let message = "";
-    
-            if (hours >= 5 && hours < 12) {
-                message = "🌞 Good Morning! Welcome to Next Afield.";
-            } else if (hours >= 12 && hours < 17) {
-                message = "🌤 Good Afternoon! Welcome to Next Afield.";
-            } else if (hours >= 17 && hours < 21) {
-                message = "🌙 Good Evening! Welcome to Next Afield.";
-            } else {
-                message = "🌜 Good Night! Planning for tomorrow’s success.";
-            }
-    
-            document.getElementById("greetingMessage").innerText = message;
-        }
-    
-        updateGreeting();
-    </script>
-    
     <!-- Navbar End -->
 
+    <!-- Login Screen -->
+    <div id="login-screen" class="flex items-center justify-center min-h-screen">
+        <div class="glassmorphism bg-white/80 p-8 rounded-xl shadow-2xl w-full max-w-md">
+            <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Intern Login</h1>
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label for="userId" class="block text-sm font-medium text-gray-700">User ID</label>
+                    <input type="text" id="userId" name="userId" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" required
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Login
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Screen (initially hidden) -->
+    <div id="dashboard-screen" class="container mx-auto p-4 sm:p-6 lg:p-8" style="display: none;">
+        <!-- Header -->
+        <header class="glassmorphism bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 rounded-xl shadow-2xl mb-8 flex flex-col sm:flex-row justify-between items-center">
+            <div class="header-text">
+                <h1 class="text-3xl sm:text-4xl font-extrabold">Next Afield <br>Intern Dashboard</h1>
+                <p class="text-lg sm:text-xl">Welcome to your personalized workspace, <span id="intern-name">Intern</span>!</p>
+            </div>
+            <button onclick="logout()" class="btn-3d bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-3 rounded-lg mt-4 sm:mt-0 hover:from-red-600 hover:to-pink-600">Logout</button>
+        </header>
+
+        <!-- Main Content -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Intern Profile (Dynamic Content) -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Intern Profile</h2>
+                <div class="flex items-center mb-4">
+                    <div class="avatar-ring">
+                        <img id="intern-avatar" src="" alt="Intern Picture" class="w-20 h-20 rounded-full">
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-gray-700"><strong>Name:</strong> <span id="intern-fullname"></span></p>
+                        <p class="text-gray-700"><strong>Intern ID:</strong> <span id="intern-id"></span></p>
+                    </div>
+                </div>
+                <p class="text-gray-700 mb-2"><strong>Email:</strong> <span id="intern-email"></span></p>
+                <p class="text-gray-700 mb-4"><strong>AICTE Registration ID:</strong> <span id="intern-aicte"></span></p>
+                <button onclick="alert('Profile updated!')" class="btn-3d bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-2 rounded-lg w-full hover:from-blue-600 hover:to-indigo-600">Edit Profile</button>
+            </div>
+
+            <!-- Attend Meeting Session -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Attend Meeting</h2>
+                <p class="text-gray-700 mb-4">Join your scheduled team meetings.</p>
+                <a href="https://example.com/meeting" target="_blank" class="btn-3d bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-2 rounded-lg w-full text-center hover:from-blue-600 hover:to-indigo-600">Join Meeting</a>
+            </div>
+
+            <!-- Project Details -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Project Details</h2>
+                <p class="text-gray-700 mb-2"><strong>Project Name:</strong> AI Dashboard Development</p>
+                <p class="text-gray-700 mb-2"><strong>Description:</strong> Build a responsive dashboard for interns to track tasks and schedules.</p>
+                <p class="text-gray-700 mb-4"><strong>Deadline:</strong> July 31, 2025</p>
+                <button onclick="alert('Project details updated!')" class="btn-3d bg-gradient-to-r from-green-500 to-teal-500 text-white px-6 py-2 rounded-lg w-full hover:from-green-600 hover:to-teal-600">Update Progress</button>
+            </div>
+
+            <!-- Daily Tasks -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Daily Tasks</h2>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>Complete UI design for dashboard</li>
+                    <li>Attend code review at 2 PM</li>
+                    <li>Submit daily progress report</li>
+                </ul>
+                <button onclick="alert('Task marked as completed!')" class="btn-3d bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-6 py-2 rounded-lg w-full hover:from-yellow-600 hover:to-orange-600">Mark as Done</button>
+            </div>
+
+            <!-- Attendance -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Attendance</h2>
+                <p class="text-gray-700 mb-4">Mark your daily attendance here.</p>
+                <a href="https://example.com/attendance" target="_blank" class="btn-3d bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-lg w-full text-center hover:from-purple-600 hover:to-pink-600">Mark Attendance</a>
+            </div>
+
+            <!-- Connect to Mentor -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Connect to Mentor</h2>
+                <p class="text-gray-700 mb-4">Schedule a session or message your mentor.</p>
+                <a href="https://example.com/mentor" target="_blank" class="btn-3d bg-gradient-to-r from-indigo-500 to-blue-500 text-white px-6 py-2 rounded-lg w-full text-center hover:from-indigo-600 hover:to-blue-600">Contact Mentor</a>
+            </div>
+
+            <!-- Assessment Session (Dynamic Content) -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Assessment Session</h2>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Active Tests</h3>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>UI Design Quiz - Due: June 15, 2025</li>
+                    <li>Coding Challenge - Due: June 20, 2025</li>
+                </ul>
+                <a href="https://example.com/active-tests" target="_blank" class="btn-3d bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-2 rounded-lg w-full text-center mb-4 hover:from-blue-600 hover:to-indigo-600">Take Active Tests</a>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Results</h3>
+                <div id="intern-results">
+                    <!-- Results will be dynamically inserted here -->
+                </div>
+                <a href="https://example.com/assessments" target="_blank" class="btn-3d bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-2 rounded-lg w-full text-center hover:from-red-600 hover:to-pink-600">View All Results</a>
+            </div>
+
+            <!-- Doubt Session -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Doubt Session</h2>
+                <p class="text-gray-700 mb-4">Schedule or join a session to clear your doubts.</p>
+                <a href="https://example.com/doubt-session" target="_blank" class="btn-3d bg-gradient-to-r from-teal-500 to-cyan-500 text-white px-6 py-2 rounded-lg w-full text-center hover:from-teal-600 hover:to-cyan-600">Join Doubt Session</a>
+            </div>
+
+            <!-- Reference Documents -->
+            <div class="card glassmorphism bg-white/80 p-6 rounded-xl">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Reference Documents</h2>
+                <p class="text-gray-700 mb-4">Access important documents related to your internship.</p>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li><a href="https://example.com/offer-letter" target="_blank" class="text-blue-600 hover:underline">Offer Letter</a></li>
+                    <li><a href="https://example.com/class-notes-web-dev" target="_blank" class="text-blue-600 hover:underline">Web Development Basics Class Notes</a></li>
+                    <li><a href="https://example.com/class-notes-ui-ux" target="_blank" class="text-blue-600 hover:underline">UI/UX Design Class Notes</a></li>
+                    <li><a href="https://example.com/project-guidelines" target="_blank" class="text-blue-600 hover:underline">Project Guidelines</a></li>
+                    <li><a href="https://example.com/intern-handbook" target="_blank" class="text-blue-600 hover:underline">Intern Handbook</a></li>
+                </ul>
+                <a href="https://example.com/all-documents" target="_blank" class="btn-3d bg-gradient-to-r from-gray-500 to-gray-700 text-white px-6 py-2 rounded-lg w-full text-center hover:from-gray-600 hover:to-gray-800">View All Documents</a>
+            </div>
+        </div>
+
+        <!-- Weekly Schedule -->
+        <div class="card glassmorphism bg-white/80 p-6 rounded-xl mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Weekly Schedule</h2>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-blue-100/50">
+                        <th class="p-3 border-b border-gray-200 text-gray-800">Day</th>
+                        <th class="p-3 border-b border-gray-200 text-gray-800">Time</th>
+                        <th class="p-3 border-b border-gray-200 text-gray-800">Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="table-row">
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Monday</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">10:00 AM - 11:00 AM</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Team Standup</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Tuesday</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">2:00 PM - 3:00 PM</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Code Review</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Wednesday</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">11:00 AM - 12:00 PM</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Mentor Session</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Thursday</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">3:00 PM - 4:00 PM</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Project Update</td>
+                    </tr>
+                    <tr class="table-row">
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Friday</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">9:00 AM - 10:00 AM</td>
+                        <td class="p-3 border-b border-gray-200 text-gray-700">Weekly Wrap-up</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Learning Plan -->
+        <div class="card glassmorphism bg-white/80 p-6 rounded-xl mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Learning Plan (June 16, 2025 - September 16, 2025)</h2>
+            <p class="text-gray-700 mb-4">Day-to-day tasks excluding Saturdays and Sundays, organized by month.</p>
+            
+            <!-- June 2025 -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-2 cursor-pointer hover:text-blue-600" onclick="toggleTable('june-table')">June 2025</h3>
+            <div id="june-table" class="collapsible-content">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-blue-100/50">
+                            <th class="p-3 border-b border-gray-200 text-gray-800">Date</th>
+                            <th class="p-3 border-b border-gray-200 text-gray-800">Task</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">June 16</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Orientation and onboarding</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">June 17</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Project introduction and setup</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">June 18</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">UI/UX design principles workshop</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">June 19</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Frontend development basics</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">June 20</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">First code review session</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- July 2025 -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-2 cursor-pointer hover:text-blue-600" onclick="toggleTable('july-table')">July 2025</h3>
+            <div id="july-table" class="collapsible-content">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-blue-100/50">
+                            <th class="p-3 border-b border-gray-200 text-gray-800">Date</th>
+                            <th class="p-3 border-b border-gray-200 text-gray-800">Task</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">July 1</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Mid-term project evaluation</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">July 2</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Backend development workshop</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">July 3</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Database design principles</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">July 4</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">API integration session</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- August 2025 -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-2 cursor-pointer hover:text-blue-600" onclick="toggleTable('august-table')">August 2025</h3>
+            <div id="august-table" class="collapsible-content">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-blue-100/50">
+                            <th class="p-3 border-b border-gray-200 text-gray-800">Date</th>
+                            <th class="p-3 border-b border-gray-200 text-gray-800">Task</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">August 1</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Final project development phase</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">August 2</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Testing and debugging workshop</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">August 3</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Performance optimization</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- September 2025 -->
+            <h3 class="text-lg font-semibold text-gray-800 mb-2 cursor-pointer hover:text-blue-600" onclick="toggleTable('september-table')">September 2025</h3>
+            <div id="september-table" class="collapsible-content">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-blue-100/50">
+                            <th class="p-3 border-b border-gray-200 text-gray-800">Date</th>
+                            <th class="p-3 border-b border-gray-200 text-gray-800">Task</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">September 1</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Final project submission</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">September 2</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Presentation preparation</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">September 3</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Final evaluation and feedback</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="p-3 border-b border-gray-200 text-gray-700">September 4</td>
+                            <td class="p-3 border-b border-gray-200 text-gray-700">Internship completion ceremony</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Start -->
     
-    <!-- Page Header Start -->
-     <!--
-    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <h1 class="display-3 text-white mb-3 animated slideInDown">Feature</h1>
-            <nav aria-label="breadcrumb animated slideInDown">
-                <ol class="breadcrumb text-uppercase mb-0">
-                    <li class="breadcrumb-item"><a class="text-white" href="index.html">Home</a></li>
-                    <li class="breadcrumb-item"><a class="text-white" href="#">Core Business</a></li>
-                    <li class="breadcrumb-item text-primary active" aria-current="page">Solutions</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
--->
-    <!-- Page Header End -->
-
-
-<!-- solutions start -->
-<style>
-    .login-container {
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        width: 100%;
-        max-width: 300px;
-        text-align: center;
-        margin: 50px auto;
-    }
-    .login-container h2 {
-        margin-bottom: 20px;
-        color: #247a9f;
-    }
-    .login-container input {
-        width: 100%;
-        padding: 10px;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    .login-container button {
-        width: 100%;
-        padding: 10px;
-        background-color: #4CAF50;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    .login-container button:hover {
-        background-color: #45a049;
-    }
-    .error {
-        color: red;
-        font-size: 14px;
-        margin-top: 10px;
-        display: none;
-    }
-    .logo {
-        width: 100px;
-        margin-bottom: 20px;
-    }
-</style>
-
-<div class="container">
-    <div class="login-container wow fadeIn" data-wow-delay="0.1s">
-        <img src="img/logo2.png" alt="Company Logo" class="logo">
-        <h2>Intern Login</h2>
-        <input type="text" id="internId" placeholder="Enter Intern ID (e.g., NAINT25J00)" required>
-        <input type="password" id="password" placeholder="Enter Password" required>
-        <button onclick="login()">Login</button>
-        <p id="error" class="error">Invalid Intern ID or Password</p>
-    </div>
-</div>
-
-<script>
-    function login() {
-        const internId = document.getElementById('internId').value.trim().toUpperCase();
-        const password = document.getElementById('password').value.trim();
-        const error = document.getElementById('error');
-        const validIds = Array.from({length: 20}, (_, i) => 
-            `NAINT25J${i.toString().padStart(2, '0')}`
-        );
-        let expectedPassword = '';
-        if (validIds.includes(internId)) {
-            expectedPassword = `NAI25J${internId.slice(-2)}`;
-        }
-        if (validIds.includes(internId) && password === expectedPassword) {
-            window.location.href = `${internId}.html`;
-        } else {
-            error.style.display = 'block';
-        }
-    }
-    document.addEventListener('keypress', function(event) {
-        if (event.key === 'Enter') {
-            login();
-        }
-    });
-</script>
-
-
-
-
-<!-- solutions end -->
-
-
-         <!-- Footer Start -->
-    <div class="container-fluid bg-dark text-light footer mt-5 pt-5 wow fadeIn" data-wow-delay="0.1s">
-        <div class="container py-5">
-            <div class="row g-5">
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Address</h5>
-                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>H Block, Sector 63, Noida, Uttar Pradesh, India, 201301</p>
-                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 99496 99496</p>
-                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>info.nextafield@gmail.com</p>
-                    <div class="d-flex pt-2">
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-                        <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Services</h5>
-                    <a class="btn btn-link" href="">Market Insights</a>
-                    <a class="btn btn-link" href="">Smart Farming Solutions</a>
-                    <a class="btn btn-link" href="">Logistics & Trade</a>
-                    <a class="btn btn-link" href="">Expert Guidance</a>
-                    <a class="btn btn-link" href="">Crop Insurance</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Quick Links</h5>
-                    <a class="btn btn-link" href="about.html">About Us</a>
-                    <a class="btn btn-link" href="contact.html">Contact Us</a>
-                    <a class="btn btn-link" href="service.html">Our Services</a>
-                    <a class="btn btn-link" href="404.html">Terms & Condition</a>
-                    <a class="btn btn-link" href="404.html">Support</a>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <h5 class="text-light mb-4">Newsletter</h5>
-                    <p>We are committed to bringing innovation, sustainability, and technology to agriculture, 
-                        helping farmers and agribusinesses thrive.</p>
-                    <div class="position-relative mx-auto" style="max-width: 400px;">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="copyright">
-                <div class="row">
-                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a class="border-bottom" href="#">Next Afield</a>, All Right Reserved.
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        Designed By <a class="border-bottom" href="https://www.nextafield.link">Team NA - Solutions & Networks</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Footer End -->
 
-
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -468,6 +510,337 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-</body>
 
+    <script>
+        // Intern data for all users (NAINT25J00 to NAINT25J19)
+        const internData = {
+            "NAINT25J00": {
+                name: "Srinu Naik Katravath",
+                email: "srinunaik@nextafield.link",
+                aicte: "AICTE67890",
+                avatar: "img/j000.png",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+            
+            "NAINT25J01": {
+                name: "Deepti Sharma",
+                email: "deepsharma1292004@gmail.com",
+                aicte: "STU6831ee697bb751748102761",
+                avatar: "img/j01.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 21, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 21, 2025" }
+                ]
+            },
+            // Add all other interns up to NAINT25J19...
+
+            "NAINT25J02": {
+                name: "Lavanya Shahapur",
+                email: "shahapurlavanya@gmail.com",
+                aicte: "STU6842eddb31e061749216731",
+                avatar: "img/j02.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J03": {
+                name: "Himaksh Yadav",
+                email: "himaksh25@gmail.com",
+                aicte: "STU683d944a6bc571748866122",
+                avatar: "img/j03.jpeg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J04": {
+                name: "Srawan Pandey",
+                email: "srawanp14@gmail.com",
+                aicte: "STU683ed7f009f481748948976",
+                avatar: "img/j04.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J05": {
+                name: "Poola Nikhila",
+                email: "poolanikhila2604@gmail.com",
+                aicte: "STU684665da8f1491749444058",
+                avatar: "img/j05.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J06": {
+                name: "Kolluru Veda Sri Surya Sasank",
+                email: "sasankkolluuru@gmail.com",
+                aicte: "STU67fe207ff27021744707711",
+                avatar: "img/j06.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J07": {
+                name: "Vaishnavi P",
+                email: "vaishnavipp444@gmail.com",
+                aicte: "STU684454ff800371749308671",
+                avatar: "img/j07.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J08": {
+                name: "Metta Subhash",
+                email: "subhashmetta1@gmail.com",
+                aicte: "STU671d0911045311729956113",
+                avatar: "img/j08.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J09": {
+                name: "G Bhavya",
+                email: "bhavyagovindaswamy2003@gmail.com",
+                aicte: "STU68426212a98e01749180946",
+                avatar: "img/j09.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J10": {
+                name: "Bholane Siddhi Shailesh",
+                email: "siddhi.22311881@viit.ac.in",
+                aicte: "STU6801f6c7f36211744959175",
+                avatar: "img/j10.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J11": {
+                name: "Kanak Sharma",
+                email: "sharmakanak043@gmail.com",
+                aicte: "STU662f4a866aa6a1714375302",
+                avatar: "img/j11.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J12": {
+                name: "Sneha Gupta",
+                email: "snehagupta25092004@gmail.com",
+                aicte: "STU6570b5274e4721701885223",
+                avatar: "img/j12.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J13": {
+                name: "Tanvi Sunil Khicchi",
+                email: "tanvikhicchi@gmail.com",
+                aicte: "STU6824c4063d4ed1747239942",
+                avatar: "img/j13.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J14": {
+                name: "Shikhar Sharma",
+                email: "shik99990@gmail.com",
+                aicte: "STU642bdb159bf811680595733",
+                avatar: "img/j14.jpeg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J15": {
+                name: "Riya Mangesh Kulkarni",
+                email: "kulkarniriya.07@gmail.com",
+                aicte: "STU680294e27566f1744999650",
+                avatar: "img/j15.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J16": {
+                name: "Tejeswini R",
+                email: "tejeswinir2005@gmail.com",
+                aicte: "STU68492ca663a8b1749626022",
+                avatar: "img/j16.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J17": {
+                name: "Sareddy Poojya Sree",
+                email: "sareddypoojyasree@gmail.com",
+                aicte: "STU681ba2b0506ba1746641584",
+                avatar: "img/j17.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+
+            "NAINT25J108": {
+                name: "Jigar Dilip Prajapati",
+                email: "jigar.22210075@viit.ac.in",
+                aicte: "STU662a69ae19d461714055598",
+                avatar: "img/j18.png",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" },
+                ]  
+            },
+            
+
+            "NAINT25J19": {
+                name: "Soni Kumari Mehta",
+                email: "sonimehta2005@gmail.com",
+                aicte: "STU66585b88ed20f1717066632",
+                avatar: "img/j19.jpg",
+                results: [
+                    { test: "HTML Basics Test", score: 0, date: "June 16, 2025" },
+                    { test: "CSS Fundamentals", score: 0, date: "June 18, 2025" }
+                ]
+            }
+        };
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const userId = document.getElementById('userId').value.toUpperCase();
+            const password = document.getElementById('password').value;
+            
+            // Validate credentials pattern
+            const idPattern = /^NAINT25J\d{2}$/;
+            const passwordPattern = /^NAI25J\d{2}$/;
+            
+            if (idPattern.test(userId)) {
+                const expectedPassword = `NAI25J${userId.slice(-2)}`;
+                
+                if (password === expectedPassword && internData[userId]) {
+                    // Hide login, show dashboard
+                    document.getElementById('login-screen').style.display = 'none';
+                    document.getElementById('dashboard-screen').style.display = 'block';
+                    document.getElementById('logout-btn').style.display = 'block';
+                    
+                    // Hide spinner
+                    document.getElementById('spinner').style.display = 'none';
+                    
+                    // Load intern data
+                    loadInternData(userId);
+                } else {
+                    alert('Invalid credentials. Please try again.');
+                }
+            } else {
+                alert('Invalid Intern ID format. It should be in NAINT25JXX format where XX are numbers.');
+            }
+        });
+
+        // Load intern-specific data
+        function loadInternData(userId) {
+            const intern = internData[userId];
+            
+            // Update profile section
+            document.getElementById('intern-name').textContent = intern.name;
+            document.getElementById('intern-fullname').textContent = intern.name;
+            document.getElementById('intern-id').textContent = userId;
+            document.getElementById('intern-email').textContent = intern.email;
+            document.getElementById('intern-aicte').textContent = intern.aicte;
+            document.getElementById('intern-avatar').src = intern.avatar;
+            
+            // Update results section
+            const resultsContainer = document.getElementById('intern-results');
+            resultsContainer.innerHTML = '';
+            
+            intern.results.forEach(result => {
+                const resultElement = document.createElement('p');
+                resultElement.className = 'text-gray-700 mb-2';
+                resultElement.innerHTML = `
+                    ${result.test}: <span class="circular-marks">${result.score}%</span> (Completed: ${result.date})
+                `;
+                resultsContainer.appendChild(resultElement);
+            });
+        }
+
+        // Logout function
+        function logout() {
+            document.getElementById('dashboard-screen').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'flex';
+            document.getElementById('logout-btn').style.display = 'none';
+            document.getElementById('userId').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Toggle table function
+        function toggleTable(tableId) {
+            const table = document.getElementById(tableId);
+            table.classList.toggle('active');
+        }
+        
+        // Logout button event listener
+        document.getElementById('logout-btn').addEventListener('click', logout);
+        
+        // Greeting message script
+        
+        
+        function updateGreeting() {
+            let now = new Date();
+            let hours = now.getHours();
+            let message = "";
+        
+            if (hours >= 5 && hours < 12) {
+                message = "🌞 Good Morning! Welcome to Next Afield.";
+            } else if (hours >= 12 && hours < 17) {
+                message = "🌤 Good Afternoon! Let's grow together.";
+            } else if (hours >= 17 && hours < 21) {
+                message = "🌙 Good Evening! Agriculture meets innovation.";
+            } else {
+                message = "🌜 Good Night! Planning for tomorrow's success.";
+            }
+        
+            document.getElementById("greetingMessage").innerText = message;
+        }
+        
+        updateGreeting();
+        
+        // Hide spinner when page loads
+        window.addEventListener('load', function() {
+            document.getElementById('spinner').style.display = 'none';
+        });
+    </script>
+</body>
 </html>
