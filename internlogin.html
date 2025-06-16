@@ -157,6 +157,29 @@
             border-color: #1a5f7d;
         }
     </style>
+
+
+    <script>
+  window.addEventListener('load', () => {
+    const bootstrapTest = window.getComputedStyle(document.body).getPropertyValue('--bs-body-bg');
+    if (!bootstrapTest) {
+      console.error('❌ Bootstrap failed to load.');
+    }
+
+    const testDiv = document.createElement('div');
+    testDiv.className = 'bg-blue-500';
+    document.body.appendChild(testDiv);
+    const tailwindTest = window.getComputedStyle(testDiv).backgroundColor;
+    if (!tailwindTest || tailwindTest === 'rgba(0, 0, 0, 0)') {
+      console.error('❌ Tailwind failed to load.');
+    }
+    testDiv.remove();
+  });
+</script>
+
+
+
+    
 </head>
 
 <body class="intern-bg">
